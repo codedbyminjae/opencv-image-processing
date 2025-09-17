@@ -19,12 +19,15 @@ cv2.imshow('Keyboard Event', image)
 
 while True:									# 무한 반복
     key = cv2.waitKeyEx(100)          		# 100ms 동안 키 이벤트 대기
-    if key == 27: break                		# ESC 키 누르면 종료
+    if key == 27:
+        break                		# ESC 키 누르면 종료
 
-    try:
-        result = switch_case[key]
-        print(result)
-    except KeyError:
-        result = -1
+    elif key == -1:
+        continue
+    else:
+        if key < 255:
+            print(key, chr(key))
+        else:
+            print(key)
 
 cv2.destroyAllWindows()                 	# 열린 모든 윈도우 제거
