@@ -6,6 +6,7 @@ print("a =", a)
 
 # vsplit : 수직 분할 (row 방향) → 1차원에서는 split과 동일
 # 12개 원소를 3등분 → 각 조각은 길이 4
+# 앞서 말한 2차원 이상이 아니기에 vsplit 불가
 # print("\nnp.vsplit(a, 3) =", np.vsplit(a, 3))
 
 # 2차원 배열 생성 (4행 3열)
