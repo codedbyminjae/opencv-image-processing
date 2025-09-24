@@ -12,7 +12,6 @@ def onChange(value):
         image -= abs(add_value)
     cv2.imshow(title, image)
 
-
 def onMouse(event, x, y, flags, param):  # 마우스 콜백 함수
     global image, bar_name
 
@@ -33,6 +32,7 @@ title = "Trackbar & Mouse Event"  # 윈도우 이름
 bar_name = "Brightness"  # 트랙바 이름
 cv2.imshow(title, image)
 
+# 콜백 함수를 부르기 때문에 오류가 안나고 실행 가능
 cv2.createTrackbar(bar_name, title, image[0][0], 255, onChange)  # 트랙바 콜백 함수
 cv2.setMouseCallback(title, onMouse)
 cv2.waitKey(0)  # 키 입력 대기
