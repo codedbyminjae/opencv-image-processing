@@ -2,37 +2,46 @@ import numpy as np
 import cv2
 
 def onChange(value):
-    global image, title  # 전역 변수 참조
-
-    add_value = value - image[0][0]  # 트렉바 값과 영상화소값 차분
-    if add_value > 0:
-        image += add_value
-    else:
-        image -= abs(add_value)
+    global image, title
+    add_value = value - image[0][0]
+    image = np.clip(image + add_value, 0, 255)
     cv2.imshow(title, image)
 
-def onMouse(event, x, y, flags, param):  # 마우스 콜백 함수
-    global image, bar_name
+def onMouse(event, x, y, flags, param):
+    global image, bar_name, title
+    if event == cv2.EVENT_RBUTTONDOWN:  # 오른쪽 클릭 → 밝기 증가
+        if image[0][0] < 246:
+            image += 10
+            cv2.setTrackbarPos(bar_name, title, int(image[0][0]))
+            cv2.imshow(title, image)
+    elif event == cv2.EVENT_LBUTTONDOWN:  # 왼쪽 클릭 → 밝기 감소
+        if image[0][0] >= 10:
+            image -= 10
+            cv2.setTrackbarPos(bar_name, title, int(image[0][0]))
+            cv2.imshow(title, image)
 
-    if event == cv2.EVENT_RBUTTONDOWN:
-        if (image[0][0] < 246): image += 10
-        cv2.setTrackbarPos(bar_name, title, image[0][0])  # 트랙바 위치 변경
-        cv2.imshow(title, image)
-
-    elif event == cv2.EVENT_LBUTTONDOWN:
-        if (image[0][0] >= 10): image -= 10
-        cv2.setTrackbarPos(bar_name, title, image[0][0])  # 트랙바 위치 변경
-        cv2.imshow(title, image)
-
-
+# 초기 세팅
 image = np.zeros((300, 500), np.uint8)
+title = "Brightness Control"
+bar_name = "Brightness"
 
-title = "Trackbar & Mouse Event"  # 윈도우 이름
-bar_name = "Brightness"  # 트랙바 이름
 cv2.imshow(title, image)
-
-# 콜백 함수를 부르기 때문에 오류가 안나고 실행 가능
-cv2.createTrackbar(bar_name, title, image[0][0], 255, onChange)  # 트랙바 콜백 함수
+cv2.createTrackbar(bar_name, title, int(image[0][0]), 255, onChange)
 cv2.setMouseCallback(title, onMouse)
-cv2.waitKey(0)  # 키 입력 대기 -> 키보드 아무거나 키 입력하면 종료
-cv2.destroyAllWindows()  # 모든 윈도우 닫기
+
+while True:
+    key = cv2.waitKey(0)
+
+    if key == 27:  # ESC 종료
+        break
+    elif key == ord('a'):  # a 키 → 밝기 감소
+        if image[0][0] >= 10:
+            image -= 10
+            cv2.setTrackbarPos(bar_name, title, int(image[0][0]))
+            cv2.imshow(title, image)
+    elif key == ord('d'):  # d 키 → 밝기 증가
+        if image[0][0] < 246:
+            image += 10
+            cv2.setTrackbarPos(bar_name, title, int(image[0][0]))
+            cv2.imshow(title, image)
+cv2.destroyAllWindows()
