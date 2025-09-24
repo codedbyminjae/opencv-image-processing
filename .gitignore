@@ -1,0 +1,19 @@
+# 이미지 파일 무시
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
+
+# PyCharm 관련 설정 파일 무시
+.idea/
+*.iml
+
+# Python 가상환경 무시
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# 기타 무시할 수 있는 항목
+.DS_Store
