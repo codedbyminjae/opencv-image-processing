@@ -1,7 +1,6 @@
 import numpy as np
 import cv2
 
-
 def onChange(value):
     global image, title  # 전역 변수 참조
 
@@ -35,5 +34,5 @@ cv2.imshow(title, image)
 # 콜백 함수를 부르기 때문에 오류가 안나고 실행 가능
 cv2.createTrackbar(bar_name, title, image[0][0], 255, onChange)  # 트랙바 콜백 함수
 cv2.setMouseCallback(title, onMouse)
-cv2.waitKey(0)  # 키 입력 대기
+cv2.waitKey(0)  # 키 입력 대기 -> 키보드 아무거나 키 입력하면 종료
 cv2.destroyAllWindows()  # 모든 윈도우 닫기
