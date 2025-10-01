@@ -6,7 +6,7 @@
 *.gif
 *.xml
 *.tif
-
+*.mp4
 
 # PyCharm 관련 설정 파일 무시
 .idea/
