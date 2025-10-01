@@ -6,7 +6,7 @@ if image is None: raise Exception("영상 파일 읽기 오류 발생") # 예외
 x_axis = cv2.flip(image, 0)                 # x축 기준 상하 뒤집기
 y_axis = cv2.flip(image, 1)                 # y축 기준 좌우 뒤집기
 xy_axis = cv2.flip(image, -1)                       # 전치랑 180도 회전이 다르다
-rep_image   = cv2.repeat(image, 1, 2)       # 반복 복사
+rep_image   = cv2.repeat(image, 2, 3)       # 반복 복사, 행 열
 trans_image = cv2.transpose(image)          # 행렬 전치
 
 ## 각 행렬을 영상으로 표시
