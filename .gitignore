@@ -4,6 +4,9 @@
 *.jpeg
 *.bmp
 *.gif
+*.xml
+*.tif
+
 
 # PyCharm 관련 설정 파일 무시
 .idea/
