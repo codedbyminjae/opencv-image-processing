@@ -1,5 +1,5 @@
 import cv2
-from utils import put_string
+from Common.utils import put_string
 
 capture = cv2.VideoCapture("images/test.mp4")		# 동영상 파일 개방
 if not capture.isOpened(): raise Exception("동영상 파일 개방 안됨")		# 예외 처리

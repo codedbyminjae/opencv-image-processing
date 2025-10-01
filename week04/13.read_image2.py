@@ -1,5 +1,5 @@
 import cv2
-from utils import print_matInfo  # 행렬 정보 출력 함수 임포트
+from Common.utils import print_matInfo  # 행렬 정보 출력 함수 임포트
 
 title1, title2 = "color2gray", "color2color"
 color2gray = cv2.imread("images/read_color.jpg", cv2.IMREAD_GRAYSCALE)
