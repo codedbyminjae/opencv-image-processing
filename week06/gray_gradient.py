@@ -1,10 +1,18 @@
 import numpy as np, cv2
+import matplotlib.pyplot as plt
 
-img = np.zeros((100,256), dtype=np.uint8)
-for i in range(100):
-    for j in range(256):
-        img[i,j] = j
-cv2.imshow('img', img)
-cv2.imwrite('images/gray_gradient256.jpg', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+img = cv2.imread('images/gray_gradient256.jpg', cv2.IMREAD_GRAYSCALE)
+
+thresh_np = np.zeros_like(img) # 검은색 이미지
+thresh_np[img>127] = 255 # 127 보다 큰 값만 255(흰색)으로 변경
+
+ret, thresh_cv = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+
+imgs = {'Original':img, 'Numpy API':thresh_np, 'cv2.threshold':thresh_cv}
+for i, (key, value) in enumerate(imgs.items()):
+    plt.subplot(1, 3, i+1)
+    plt.title(key)
+    plt.imshow(value, cmap='gray')
+    plt.xticks((0, 127, 255)); plt.yticks([])
+
+plt.show()
