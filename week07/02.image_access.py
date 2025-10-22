@@ -1,5 +1,7 @@
 import numpy as np, cv2, time
 
+# Picture Element
+# 가장 간단하지만 속도가 빠르지 않은 방법
 def pixel_access1(image):
     image1 = np.zeros(image.shape[:2], image.dtype)
     for i in range(image.shape[0]):
@@ -8,6 +10,7 @@ def pixel_access1(image):
             image1[i, j] =  255 - pixel            # 화소 할당
     return image1
 
+# item 메서드를 활용해서 접근, 앞선 방법보다는 빠르다. 이제 지원 안함
 def pixel_access2(image):
     image2 = np.zeros(image.shape[:2], image.dtype)
     for i in range(image.shape[0]):
@@ -16,12 +19,15 @@ def pixel_access2(image):
             image2.itemset((i, j),  255 - pixel)  # 화소 할당
     return image2
 
+# 룩업 테이블 이해 못했으니까 다시 공부.
 def pixel_access3(image):
     lut = [255 - i for i in range(256)]  # 룩업테이블 생성
     lut = np.array(lut, np.uint8)
     image3 = lut[image]
+#    image3 = cv2.LUT(image, lut)
     return image3
 
+# OpenCV 함수 이용
 def pixel_access4(image):
     image4 = cv2.subtract(255, image)
     return image4
